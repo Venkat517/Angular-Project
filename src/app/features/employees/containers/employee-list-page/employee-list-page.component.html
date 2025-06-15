@@ -1,1 +1,8 @@
-<p>employee-list-page works!</p>
+<ng-container *ngIf="employees$ | async as employees">
+  <app-employee-table [employees]="employees"></app-employee-table>
+</ng-container>
+
+<ng-container *ngIf="loading$ | async">
+  <p>Loading employees...</p>
+</ng-container>
+

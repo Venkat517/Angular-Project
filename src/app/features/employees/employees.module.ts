@@ -6,6 +6,10 @@ import { EmployeeTableComponent } from '../employees/components/employee-table/e
 import { EmployeeFormComponent } from '../employees/components/employee-form/employee-form.component';
 import { EmployeeListPageComponent } from '../employees/containers/employee-list-page/employee-list-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { EmployeeEffects } from './state/employee.effects';
+import { employeeReducer } from './state/employee.reducer';
 
 
 @NgModule({
@@ -17,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    EmployeesRoutingModule
+    EmployeesRoutingModule,
+    StoreModule.forFeature('employee', employeeReducer),
+    EffectsModule.forFeature([EmployeeEffects])
   ]
 })
 export class EmployeesModule { }
