@@ -17,11 +17,13 @@ import { RouterModule } from '@angular/router';
 })
 export class EmployeeListPageComponent implements OnInit {
 employees$!: Observable<Employee[]>;
+loading$!: Observable<boolean>;
 
   constructor(private store: Store) {}
   ngOnInit(): void {
     console.log("Component Init")
   this.store.dispatch(EmployeeActions.loadEmployees());
   this.employees$ = this.store.select(selectAllEmployees);
+  this.loading$ = this.store.select(selectEmployeeLoading);
   }
 }

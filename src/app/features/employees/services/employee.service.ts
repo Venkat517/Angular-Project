@@ -13,7 +13,7 @@ export class EmployeeService {
 
 constructor(private _http: HttpClient) {}
   getEmployees(): Observable<Employee[]> {
-    console.log('🔍 Service: hitting API at ' + this._url);
+    console.log('🔍 Service: hitting API at ' + this._url, this._http.get<Employee[]>(this._url));
     return this._http.get<Employee[]>(this._url);
   }
 }

@@ -1,19 +1,24 @@
 
-<table>
+<div class="employee-table-container">
+<table *ngIf="employees.length > 0; else noData" class="employee-table responsive-table">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>#ID</th>
       <th>Name</th>
       <th>Position</th>
-      <th>Salary</th>
+      <th>Salary (₹)</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let emp of employees">
-      <td>{{ emp.id }}</td>
-      <td>{{ emp.name }}</td>
-      <td>{{ emp.position }}</td>
-      <td>{{ emp.salary }}</td>
-    </tr>
+    <tr *ngFor="let emp of employees; let i = index">
+      <td data-label="ID">{{ emp.id }}</td>
+        <td data-label="Name">{{ emp.name }}</td>
+        <td data-label="Position">{{ emp.position }}</td>
+        <td data-label="Salary">{{ emp.salary | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
   </tbody>
 </table>
+</div>
+
+<ng-template #noData>
+  <p>No employees found.</p>
+</ng-template>

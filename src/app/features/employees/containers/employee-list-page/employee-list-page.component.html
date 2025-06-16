@@ -1,4 +1,3 @@
 <ng-container *ngIf="employees$ | async as employees">
-  <p>✅ employees$ resolved, length: {{ employees.length }}</p>
   <app-employee-table [employees]="employees"></app-employee-table>
 </ng-container>
