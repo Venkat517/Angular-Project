@@ -5,15 +5,15 @@ export const selectEmployeeState = createFeatureSelector<EmployeeState>('employe
 
 export const selectAllEmployees = createSelector(
   selectEmployeeState,
-  (state) => state.employees
+  (state: EmployeeState) => state.employees
 );
 
 export const selectEmployeeLoading = createSelector(
   selectEmployeeState,
-  (state) => state.loading
+  (state: EmployeeState) => state.loading
 );
 
 export const selectEmployeeError = createSelector(
   selectEmployeeState,
-  (state) => state.error
+  (state: EmployeeState) => state.error
 );

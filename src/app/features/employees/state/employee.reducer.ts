@@ -1,27 +1,29 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadEmployees, loadEmployeesFailure, loadEmployeesSuccess } from './employee.actions';
+import * as EmployeeActions from './employee.actions';
 import { initialEmployeeState } from "./employee.state";
 
 export const employeeReducer = createReducer(
     initialEmployeeState, //default State
 
   //load Employees
-  on(loadEmployees, (state) =>({
+  on(EmployeeActions.loadEmployees, (state) =>({
     ...state,
     loading: true,
     error: null
   })),
 
   //load Success
-  on(loadEmployeesSuccess, (state, {employee}) =>({
+  on(EmployeeActions.loadEmployeesSuccess, (state, {employees}) =>{
+    console.log('Reducer: updating state with employees', employees);
+    return {
     ...state,
-    employee,
+    employees,
     loading: false,
-    Error
-  })),
+    }
+  }),
 
   //load failure
-  on(loadEmployeesFailure, (state, {error}) =>({
+  on(EmployeeActions.loadEmployeesFailure, (state, {error}) =>({
     ...state,
     error,
     loading: false

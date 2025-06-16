@@ -9,7 +9,7 @@ export const loadEmployees = createAction(
 // DEFINE LOAD ACTION SUCCESS: this action triggers when API call is successfull, and we pass employee[] to store
 export const loadEmployeesSuccess = createAction(
     '[Employee] Load Employees Success',
-    props<{ employee: Employee[] } >()
+    props<{ employees: Employee[] } >()
 );
 
 // DEFINE LOAD ACTION FAILURE: this action triggers when API call is failure, and we pass error to store
