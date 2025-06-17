@@ -17,7 +17,7 @@ export const employeeReducer = createReducer(
     console.log('Reducer: updating state with employees', employees);
     return {
     ...state,
-    employees,
+    employees, // overwrite employee list with API response
     loading: false,
     }
   }),
@@ -26,6 +26,12 @@ export const employeeReducer = createReducer(
   on(EmployeeActions.loadEmployeesFailure, (state, {error}) =>({
     ...state,
     error,
+    loading: false
+  })),
+
+  on(EmployeeActions.addEmployeeSuccess, (state, {employee}) => ({
+    ...state,
+    employees: [...state.employees, employee],
     loading: false
   }))
 )

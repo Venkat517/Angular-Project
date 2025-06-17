@@ -16,4 +16,9 @@ constructor(private _http: HttpClient) {}
     console.log('🔍 Service: hitting API at ' + this._url, this._http.get<Employee[]>(this._url));
     return this._http.get<Employee[]>(this._url);
   }
+
+ addEmployee(employee: Employee): Observable<Employee> {
+  console.log('Added Employee', employee + 'Successfully');
+  return this._http.post<Employee>(this._url, employee);
+}
 }

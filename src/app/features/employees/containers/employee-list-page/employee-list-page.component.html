@@ -1,3 +1,6 @@
+<h4>👨‍💼 Add Employee</h4>
+<app-employee-form (formSubmitted)="onFormSubmit($event)"></app-employee-form>
+
 <ng-container *ngIf="employees$ | async as employees">
   <app-employee-table [employees]="employees"></app-employee-table>
 </ng-container>

@@ -22,4 +22,17 @@ export class EmployeeEffects {
         catchError((error: any) => of(EmployeeActions.loadEmployeesFailure ({error}))) // dispatch error
       ))
     ))
+
+    addEmployee$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(EmployeeActions.addEmployee),
+    mergeMap(({ employee }) =>
+      this.employeeService.addEmployee(employee).pipe(
+        map((newEmployee) => EmployeeActions.addEmployeeSuccess({ employee: newEmployee })),
+        catchError((error) => of(EmployeeActions.addEmployeeFailure({ error: error.message })))
+      )
+    )
+  )
+);
+
 }

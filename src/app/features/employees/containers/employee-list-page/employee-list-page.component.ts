@@ -7,11 +7,12 @@ import { Employee } from '../../models/employee.model';
 import { CommonModule } from '@angular/common';
 import { EmployeeTableComponent } from '../../employee-table/employee-table.component';
 import { RouterModule } from '@angular/router';
+import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
 @Component({
   selector: 'app-employee-list-page',
   standalone: true,
-  imports: [CommonModule, EmployeeTableComponent, RouterModule],
+  imports: [CommonModule, EmployeeTableComponent, RouterModule, EmployeeFormComponent],
   templateUrl: './employee-list-page.component.html',
   styleUrls: ['./employee-list-page.component.scss']
 })
@@ -21,9 +22,13 @@ loading$!: Observable<boolean>;
 
   constructor(private store: Store) {}
   ngOnInit(): void {
-    console.log("Component Init")
+  console.log("Component Init")
   this.store.dispatch(EmployeeActions.loadEmployees());
   this.employees$ = this.store.select(selectAllEmployees);
   this.loading$ = this.store.select(selectEmployeeLoading);
+  }
+
+  onFormSubmit(employee: Employee): void {
+    this.store.dispatch(EmployeeActions.addEmployee({employee: employee}))
   }
 }
