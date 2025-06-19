@@ -33,5 +33,11 @@ export const employeeReducer = createReducer(
     ...state,
     employees: [...state.employees, employee],
     loading: false
-  }))
+  })),
+
+  on(EmployeeActions.deleteEmployeeSuccess, (state, { id }) => ({
+  ...state,
+  employees: state.employees.filter(emp => emp.id !== id)
+}))
+
 )

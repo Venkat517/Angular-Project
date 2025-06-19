@@ -20,6 +20,8 @@ export class EmployeeListPageComponent implements OnInit {
 employees$!: Observable<Employee[]>;
 loading$!: Observable<boolean>;
 
+deletingIds: number[] = [];
+
   constructor(private store: Store) {}
   ngOnInit(): void {
   console.log("Component Init")
@@ -31,4 +33,10 @@ loading$!: Observable<boolean>;
   onFormSubmit(employee: Employee): void {
     this.store.dispatch(EmployeeActions.addEmployee({employee: employee}))
   }
+
+  onDeleteEmployee(id: number): void {
+  this.deletingIds.push(id);
+  this.store.dispatch(EmployeeActions.deleteEmployee({ id }));
+}
+
 }

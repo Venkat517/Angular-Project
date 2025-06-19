@@ -24,12 +24,31 @@ export class EmployeeEffects {
     ))
 
     addEmployee$ = createEffect(() =>
-  this.actions$.pipe(
+    this.actions$.pipe(
     ofType(EmployeeActions.addEmployee),
     mergeMap(({ employee }) =>
       this.employeeService.addEmployee(employee).pipe(
         map((newEmployee) => EmployeeActions.addEmployeeSuccess({ employee: newEmployee })),
         catchError((error) => of(EmployeeActions.addEmployeeFailure({ error: error.message })))
+      )
+    )
+  )
+);
+
+deleteEmployee$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(EmployeeActions.deleteEmployee),
+    tap(({ id }) => console.log('🗑️ Deleting employee with ID:', id)),
+    mergeMap(({ id }) =>
+      this.employeeService.deleteEmployee(id).pipe(
+        map(() => {
+          console.log('✅ Deleted successfully:', id);
+          return EmployeeActions.deleteEmployeeSuccess({ id: +id });
+        }),
+        catchError((error) => {
+          console.error('❌ Delete failed:', error);
+          return of(EmployeeActions.deleteEmployeeFailure({ error }));
+        })
       )
     )
   )

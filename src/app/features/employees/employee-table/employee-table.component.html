@@ -15,6 +15,7 @@
         <td data-label="Name">{{ emp.name }}</td>
         <td data-label="Position">{{ emp.position }}</td>
         <td data-label="Salary">{{ emp.salary | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+        <td data-label="Action"><button (click)="onDelete(emp.id)" [disabled]="deletingIds.includes(emp.id)">🗑️</button> </td>
   </tbody>
 </table>
 </div>

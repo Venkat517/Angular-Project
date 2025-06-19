@@ -21,4 +21,9 @@ constructor(private _http: HttpClient) {}
   console.log('Added Employee', employee + 'Successfully');
   return this._http.post<Employee>(this._url, employee);
 }
+
+deleteEmployee(id: number | string): Observable<void> {
+  return this._http.delete<void>(`${this._url}/${id}`);
+}
+
 }
