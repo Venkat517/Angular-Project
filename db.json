@@ -167,6 +167,12 @@
       "name": "Jaya",
       "position": "Automation Tester",
       "salary": 44000
+    },
+    {
+      "id": "155b",
+      "name": "sandepp",
+      "position": "Architect",
+      "salary": 10000
     }
   ]
 }

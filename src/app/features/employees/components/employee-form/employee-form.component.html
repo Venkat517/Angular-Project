@@ -1,7 +1,11 @@
+<div class="form-title">Add Employee</div>
 <form [formGroup]="employeeForm" (ngSubmit)="submit()" class="form">
   <label>
     Name:
-    <input formControlName="name" />
+    <span class="input-wrapper">
+      <span class="input-icon">👤</span>
+      <input formControlName="name" />
+    </span>
   </label>
   <div *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched" class="error">
     Name is required
@@ -9,7 +13,10 @@
 
   <label>
     Position:
-    <input formControlName="position" />
+    <span class="input-wrapper">
+      <span class="input-icon">💼</span>
+      <input formControlName="position" />
+    </span>
   </label>
   <div *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched" class="error">
     Position is required
@@ -17,7 +24,10 @@
 
   <label>
     Salary:
-    <input type="number" formControlName="salary" />
+    <span class="input-wrapper">
+      <span class="input-icon">₹</span>
+      <input type="number" formControlName="salary" />
+    </span>
   </label>
   <div *ngIf="employeeForm.get('salary')?.invalid && employeeForm.get('salary')?.touched" class="error">
     Salary must be at least ₹1000
