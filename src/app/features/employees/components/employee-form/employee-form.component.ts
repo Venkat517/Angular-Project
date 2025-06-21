@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee } from '../../models/employee.model';
 @Component({
@@ -9,8 +9,9 @@ import { Employee } from '../../models/employee.model';
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss']
 })
-export class EmployeeFormComponent {
+export class EmployeeFormComponent implements OnChanges {
   @Output() formSubmitted = new EventEmitter<Employee>();
+  @Input() employee: Employee | null = null;
 
   employeeForm: FormGroup; // to store entire form structure in store
 
@@ -22,10 +23,31 @@ export class EmployeeFormComponent {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['employee']) {
+      console.log('💥 employee input changed:', this.employee);
+      if (this.employee) {
+        this.employeeForm.patchValue({
+          name: this.employee.name,
+          position: this.employee.position,
+          salary: this.employee.salary
+        });
+      } else {
+        this.employeeForm.reset();
+      }
+    }
+  }
+
   submit(): void {
     if (this.employeeForm.valid) {
-      this.formSubmitted.emit(this.employeeForm.value);
-      this.employeeForm.reset(); // optional: reset after submit
+      const data = this.employeeForm.value;
+
+      const payload: Employee = this.employee?.id
+        ? { ...data, id: this.employee.id }
+        : data;
+
+      this.formSubmitted.emit(payload);
+      this.employeeForm.reset();
     }
   }
 }

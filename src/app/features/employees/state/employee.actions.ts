@@ -16,6 +16,11 @@ export const deleteEmployee = createAction(
     props<{ id: string | number }> ()
 );
 
+export const updateEmployee = createAction(
+  '[Employee] Update Employee',
+  props<{ employee: Employee }>()
+);
+
 // DEFINE LOAD ACTION SUCCESS: this action triggers when API call is successfull, and we pass employee[] to store
 export const loadEmployeesSuccess = createAction(
     '[Employee] Load Employees Success',
@@ -45,6 +50,16 @@ export const deleteEmployeeSuccess = createAction(
 
 export const deleteEmployeeFailure = createAction(
   '[Employee] Delete Employee Failure',
+  props<{ error: any }>()
+);
+
+export const updateEmployeeSuccess = createAction(
+  '[Employee] Update Employee Success',
+  props<{ employee: Employee }>()
+);
+
+export const updateEmployeeFailure = createAction(
+  '[Employee] Update Employee Failure',
   props<{ error: any }>()
 );
 

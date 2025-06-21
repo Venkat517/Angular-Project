@@ -7,12 +7,6 @@
       "salary": 50000
     },
     {
-      "id": "4",
-      "name": "John",
-      "position": "UI Designer",
-      "salary": 45000
-    },
-    {
       "id": "5",
       "name": "Priya",
       "position": "QA Engineer",
@@ -161,18 +155,6 @@
       "name": "Nikhil",
       "position": "DevOps Lead",
       "salary": 83000
-    },
-    {
-      "id": "30",
-      "name": "Jaya",
-      "position": "Automation Tester",
-      "salary": 44000
-    },
-    {
-      "id": "155b",
-      "name": "sandepp",
-      "position": "Architect",
-      "salary": 10000
     }
   ]
 }

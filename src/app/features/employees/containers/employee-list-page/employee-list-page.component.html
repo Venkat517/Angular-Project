@@ -1,5 +1,13 @@
-<app-employee-form (formSubmitted)="onFormSubmit($event)"></app-employee-form>
+<app-employee-form
+  [employee]="selectedEmployee"
+  (formSubmitted)="onFormSubmit($event)">
+</app-employee-form>
 
 <ng-container *ngIf="employees$ | async as employees">
-  <app-employee-table [employees]="employees" (delete)="onDeleteEmployee($event)"></app-employee-table>
+  <app-employee-table
+    [employees]="employees"
+    (delete)="onDeleteEmployee($event)"
+    (edit)="onEditEmployee($event)">
+  </app-employee-table>
 </ng-container>
+

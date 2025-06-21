@@ -26,4 +26,9 @@ deleteEmployee(id: number | string): Observable<void> {
   return this._http.delete<void>(`${this._url}/${id}`);
 }
 
+updateEmployee(employee: Employee): Observable<Employee> {
+  return this._http.put<Employee>(`${this._url}/${employee.id}`, employee);
+}
+
+
 }

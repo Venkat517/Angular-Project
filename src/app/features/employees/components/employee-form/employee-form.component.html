@@ -34,4 +34,6 @@
   </div>
 
   <button type="submit" [disabled]="employeeForm.invalid">Add Employee</button>
+  <p>{{ employeeForm.value | json }}</p>
+
 </form>

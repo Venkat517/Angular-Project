@@ -1,4 +1,3 @@
-
 <div class="employee-table-container">
 <table *ngIf="employees.length > 0; else noData" class="employee-table responsive-table">
   <thead>
@@ -7,15 +6,22 @@
       <th>Name</th>
       <th>Position</th>
       <th>Salary (₹)</th>
+      <th style="text-align:center;"><span title="Delete">🗑️</span></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let emp of employees; let i = index">
-      <td data-label="ID">{{ emp.id }}</td>
-        <td data-label="Name">{{ emp.name }}</td>
-        <td data-label="Position">{{ emp.position }}</td>
-        <td data-label="Salary">{{ emp.salary | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
-        <td data-label="Action"><button (click)="onDelete(emp.id)" [disabled]="deletingIds.includes(emp.id)">🗑️</button> </td>
+    <tr *ngFor="let emp of employees; let rowIdx = index">
+      <td data-label="ID" (click)="selectCell(rowIdx, 0)" [class.selected-cell]="selectedRow === rowIdx && selectedCol === 0">{{ emp.id }}</td>
+      <td data-label="Name" (click)="selectCell(rowIdx, 1)" [class.selected-cell]="selectedRow === rowIdx && selectedCol === 1">{{ emp.name }}</td>
+      <td data-label="Position" (click)="selectCell(rowIdx, 2)" [class.selected-cell]="selectedRow === rowIdx && selectedCol === 2">{{ emp.position }}</td>
+      <td data-label="Salary" (click)="selectCell(rowIdx, 3)" [class.selected-cell]="selectedRow === rowIdx && selectedCol === 3">{{ emp.salary | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+      <td data-label="Action" class="action-cell" (click)="selectCell(rowIdx, 4)" [class.selected-cell]="selectedRow === rowIdx && selectedCol === 4">
+        <button (click)="onDelete(emp.id); $event.stopPropagation();" [disabled]="deletingIds.includes(emp.id)" title="Delete">
+          🗑️
+        </button>
+        <button (click)="onEdit(emp)">✏️</button>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>

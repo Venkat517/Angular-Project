@@ -21,6 +21,7 @@ employees$!: Observable<Employee[]>;
 loading$!: Observable<boolean>;
 
 deletingIds: number[] = [];
+selectedEmployee: Employee | null = null;
 
   constructor(private store: Store) {}
   ngOnInit(): void {
@@ -30,13 +31,24 @@ deletingIds: number[] = [];
   this.loading$ = this.store.select(selectEmployeeLoading);
   }
 
-  onFormSubmit(employee: Employee): void {
-    this.store.dispatch(EmployeeActions.addEmployee({employee: employee}))
+  onFormSubmit(emp: Employee): void {
+    if (emp.id) {
+      this.store.dispatch(EmployeeActions.updateEmployee({ employee: emp }));
+    } else {
+      this.store.dispatch(EmployeeActions.addEmployee({ employee: emp }));
+    }
+    this.selectedEmployee = null;
   }
+
 
   onDeleteEmployee(id: number): void {
   this.deletingIds.push(id);
   this.store.dispatch(EmployeeActions.deleteEmployee({ id }));
 }
 
+
+onEditEmployee(emp: Employee): void {
+  console.log('👆 Edit button clicked - sending to form:', emp);
+  this.selectedEmployee = {...emp}
+}
 }

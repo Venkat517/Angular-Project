@@ -54,4 +54,19 @@ deleteEmployee$ = createEffect(() =>
   )
 );
 
+updateEmployee$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(EmployeeActions.updateEmployee),
+    mergeMap(({ employee }) =>
+      this.employeeService.updateEmployee(employee).pipe(
+        map(() => EmployeeActions.updateEmployeeSuccess({ employee })),
+        catchError((error) =>
+          of(EmployeeActions.updateEmployeeFailure({ error }))
+        )
+      )
+    )
+  )
+);
+
+
 }

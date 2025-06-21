@@ -18,6 +18,35 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
+  .action-cell {
+    text-align: center;
+    min-width: 70px;
+    button {
+      margin: 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+    }
+  }
+
+  tbody tr:hover {
+    background: #e3f2fd;
+  }
+
+  .selected-cell {
+    background: #fffde7 !important;
+    border: 2px solid #ffd600 !important;
+    box-shadow: 0 0 0 2px #fffde7;
+    z-index: 1;
+    position: relative;
+    transition: background 0.1s, border 0.1s;
+  }
 }
 
 .employee-table thead tr {
@@ -35,11 +64,6 @@
 
 .employee-table tbody tr {
   transition: background 0.2s, transform 0.15s;
-}
-.employee-table tbody tr:hover {
-  background: #e3f2fd;
-  transform: scale(1.01);
-  box-shadow: 0 2px 8px rgba(33,150,243,0.08);
 }
 .employee-table tbody tr:nth-child(even) {
   background: #f7fafd;
@@ -125,6 +149,12 @@
     }
     td:last-child {
       border-bottom: none;
+    }
+    .action-cell {
+      justify-content: center;
+      td {
+        text-align: center;
+      }
     }
   }
 }
